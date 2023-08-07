@@ -1,9 +1,15 @@
 import React from 'react'
-
+import Notes from './Notes'
+import { AlertColors } from './Alert'
 const Home = () => {
+
   return (
     <div>
-      This is home
+      <AlertColors/>
+      <h1>
+        add a note
+      </h1>
+      <Notes/>
     </div>
   )
 }
