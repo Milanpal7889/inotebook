@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
  
 export function SignIn() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen((cur) => !cur);
  
   return (

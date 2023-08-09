@@ -4,6 +4,7 @@ import Navbar from './Components/Navbar';
 import Home from './Components/Home';
 import About from './Components/About';
 import NoteState from './context/notes/NoteState';
+import { SignIn } from './Dialogues/SignIN';
 import LoginForm from './Components/LoginForm';
 
 function App() {
@@ -34,6 +35,14 @@ function App() {
             element={
               <>
                 <LoginForm/>
+              </>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <>
+                <SignIn/>
               </>
             }
           />

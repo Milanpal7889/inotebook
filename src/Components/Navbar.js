@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { Button } from "@material-tailwind/react";
 
 function Navbar() {
     let location = useLocation();
@@ -36,17 +37,15 @@ function Navbar() {
                                 About
                             </Link>
                         </li>
-                        <li className="mb-4 pl-2 lg:mb-0 lg:pl-0 lg:pr-1" data-te-nav-item-ref>
-                            <Link className={`${location.pathname==="/login"?"active":""} p-0 text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400`} to="/login" data-te-nav-link-ref>
-                                Login
-                            </Link>
-                        </li>
-                        <li className="mb-4 pl-2 lg:mb-0 lg:pl-0 lg:pr-1" data-te-nav-link-ref>
-                            <Link to="/" className="text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400">
-                                Disabled
-                            </Link>
-                        </li>
                     </ul>
+                </div>
+                <div className="flex w-max gap-4">
+                    <Link className={`${location.pathname==="/login"?"active":""} p-0 text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400`} to="/login" data-te-nav-link-ref>
+                        <Button color="blue">Login</Button>
+                    </Link>
+                    <Link className={`${location.pathname==="/signup"?"active":""} p-0 text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400`} to="/signup" data-te-nav-link-ref>
+                        <Button color="blue">SignUp</Button>
+                    </Link>
                 </div>
             </div>
         </nav>
