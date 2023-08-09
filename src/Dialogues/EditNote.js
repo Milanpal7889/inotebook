@@ -14,7 +14,7 @@ export function EditNote(props) {
     const context = useContext(noteContext);
     const { editNote } = context;
 
-    const [note, setNote] = useState({ id: props.id, tittle: props.tittle, description: props.description, tag:props.tag?props.tag:""});
+    const [note, setNote] = useState({ id: props.id, tittle: props.tittle, description: props.description, tag: props.tag ? props.tag : "default" });
 
     const handleClose = () => {
         props.handleClose(); // Call the handleClose function passed as prop
@@ -24,14 +24,14 @@ export function EditNote(props) {
         setNote({ ...note, [e.target.name]: e.target.value });
     };
 
-    const onClick = (e) => {
-        editNote(note.id, note.tittle, note.description, note.tag);
+    const onClick = async(e) => {
+        await editNote(note.id, note.tittle, note.description, note.tag);
         handleClose(); // Close the dialog after editing
     };
 
 
     return (
-        <Dialog open={props.open?props.open:false} handler={handleClose}>
+        <Dialog open={props.open ? props.open : false} handler={handleClose}>
             <div className="flex items-center justify-between">
                 <DialogHeader>Edit Note</DialogHeader>
                 <svg
@@ -59,7 +59,15 @@ export function EditNote(props) {
                 <Button variant="outlined" color="red" onClick={handleClose}>
                     Close
                 </Button>
-                <Button disabled={!(note.tittle || note.description)} variant="gradient" color="green" onClick={onClick}>
+                <Button
+                    disabled={
+                        !(note.tittle && note.tittle.length > 5) ||  // Check if note.title is defined and has length > 5
+                        !(note.description && note.description.length > 5) // Check if note.description is defined and not empty
+                    }
+                    variant="gradient"
+                    color="green"
+                    onClick={onClick}
+                >
                     Save Changes
                 </Button>
             </DialogFooter>
