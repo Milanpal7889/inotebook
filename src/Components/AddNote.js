@@ -10,7 +10,7 @@ import { useContext, useState } from "react";
 
 const AddNote = () => {
     const context = useContext(noteContext)
-    let { addNote } = context
+    let { addNote, getNotes } = context
 
     const [note, setNote] = useState({ tittle: "", description: "", tag: "default" })
     const onChange = (e) => {
@@ -19,6 +19,9 @@ const AddNote = () => {
 
     const onClick = (e) => {
         addNote(note.tittle, note.description, note.tag)
+        getNotes()
+        setNote({ tittle: "", description: "", tag: "default" })
+
     }
 
     return (
