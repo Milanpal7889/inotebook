@@ -6,6 +6,7 @@ import About from './Components/About';
 import NoteState from './context/notes/NoteState';
 import { SignIn } from './Dialogues/SignIN';
 import LoginForm from './Components/LoginForm';
+import SignUp from './Components/SignUp';
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
             path="/signup"
             element={
               <>
-                <SignIn/>
+                <SignUp/>
               </>
             }
           />

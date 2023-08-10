@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import noteContext from '../context/notes/NoteContext'
 
 const LoginForm = () => {
-    
+    const context = useContext(noteContext)
+    let { setToken } = context
     const[note, setNote]=useState({email:"",password:""})
 
     const onChange = (e) => {
@@ -19,6 +21,7 @@ const LoginForm = () => {
         })
         setNote({email:"",password:""})
         const json = await response.json()
+        setToken(JSON.stringify(json))
         console.log(json) 
     }
 
