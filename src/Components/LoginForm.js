@@ -1,14 +1,17 @@
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import noteContext from '../context/notes/NoteContext'
+
 
 const LoginForm = () => {
     const context = useContext(noteContext)
-    let { setToken } = context
+    let { getNotes } = context
     const[note, setNote]=useState({email:"",password:""})
 
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value });
     };
+    const navigate = useNavigate()
 
     const handleSubmit = async(e) =>{
         e.preventDefault()
@@ -21,8 +24,10 @@ const LoginForm = () => {
         })
         setNote({email:"",password:""})
         const json = await response.json()
-        setToken(JSON.stringify(json))
-        console.log(json) 
+        localStorage.setItem('token',JSON.stringify(json))
+        getNotes() 
+        navigate('/');   
+        console.log(json)
     }
 
     return (

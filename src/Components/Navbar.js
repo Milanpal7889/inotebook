@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { Button } from "@material-tailwind/react";
 
@@ -9,6 +9,11 @@ function Navbar() {
         // Google Analytics
         console.log("working",location)
       }, [location]);
+    const navigate = useNavigate()
+    const hanldeLogout = () =>{
+        localStorage.setItem('token',JSON.stringify({"success":false,"authToken":""}))
+        navigate("/login")
+    }
   return (
     <div>
         <nav className = " relative flex w-full flex-nowrap black items-center justify-between bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:flex-wrap lg:justify-start lg:py-4" data-te-navbar-ref>
@@ -39,6 +44,7 @@ function Navbar() {
                         </li>
                     </ul>
                 </div>
+                {!localStorage.getItem('token')?
                 <div className="flex w-max gap-4">
                     <Link className={`${location.pathname==="/login"?"active":""} p-0 text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400`} to="/login" data-te-nav-link-ref>
                         <Button color="blue">Login</Button>
@@ -46,7 +52,11 @@ function Navbar() {
                     <Link className={`${location.pathname==="/signup"?"active":""} p-0 text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400`} to="/signup" data-te-nav-link-ref>
                         <Button color="blue">SignUp</Button>
                     </Link>
+                </div>:
+                <div className="flex w-max gap-4">
+                    <Button onClick={hanldeLogout} color="blue">LogOut</Button>
                 </div>
+                }
             </div>
         </nav>
     </div>

@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NoteContext from "./NoteContext";
 
 const NoteState = (props) => {
     const host = "http://localhost:5000";
-    const [notes, setNotes] = useState([]);
-    const [token, setToken] = useState(null)
+    const [notes, setNotes] = useState(['no notes present']);
+    let { authToken } = JSON.parse(localStorage.getItem('token'));
+
+    //get token
+    let getToken = () =>{
+       return authToken
+    }
 
     // Fetch all notes
-    const getNotes = async (token) => {
+    const getNotes = async () => {
         // API call
         
         const response = await fetch(`${host}/api/notes/fetchallnotes`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'authToken': token
+                'authToken': getToken()            
             }
         })
         const json = await response.json()
@@ -29,7 +34,7 @@ const NoteState = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'authToken': token
+                'authToken': getToken()
             },
             body: JSON.stringify({ tittle, description, tag })
         });
@@ -56,7 +61,7 @@ const NoteState = (props) => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'authToken': token
+                'authToken': getToken()
             }
         })
         let newNotes = notes.filter((note) => { return note._id !== id })
@@ -73,7 +78,7 @@ const NoteState = (props) => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'authToken': token
+                'authToken': getToken()
             },
             body: JSON.stringify({ tittle, description, tag })
         })
@@ -95,7 +100,7 @@ const NoteState = (props) => {
 
 
     return (
-        <NoteContext.Provider value={{ notes, getNotes, addNote, deleteNote, editNote, setToken }}>
+        <NoteContext.Provider value={{ notes , getNotes, addNote, deleteNote, editNote }}>
             {props.children}
         </NoteContext.Provider>
     );

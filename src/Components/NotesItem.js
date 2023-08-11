@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import noteContext from '../context/notes/NoteContext';
+import NoteContext from '../context/notes/NoteContext'; 
 import { useContext } from 'react';
 import { Button } from "@material-tailwind/react";
 import { EditNote } from '../Dialogues/EditNote';
 
 const NotesItem = (props) => {
-    const context = useContext(noteContext);
-    const { deleteNote } = context;
+    const context = useContext(NoteContext);
+    const { deleteNote } = context.notes;
     const { note } = props;
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(null);
 
     const handleOpen = () => {
         setOpen(true);

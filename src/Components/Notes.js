@@ -5,16 +5,18 @@ import AddNote from "./AddNote";
 import { useNavigate } from "react-router-dom";
 
 const Notes = () => {
-    const context = useContext(NoteContext);
-    const { notes, token, getNotes } = context;
+    const context = useContext(NoteContext)
+    const { notes, getNotes} = context;
     const navigate = useNavigate()
+    const tokens =localStorage.getItem('token')
     useEffect(() => {
-        if (token) {
-            console.log(token)
+        if (localStorage.getItem(('token').success)===false) {
+            console.log("navigate")
             // Use Redirect to navigate to the login page
             navigate('/login');
         } else {
-            getNotes(token);
+            console.log(tokens)
+            getNotes();
         }
         //eslint-disable-next-line
     }, []);
@@ -25,7 +27,6 @@ const Notes = () => {
             <h1>Your notes</h1>
             <div className="flex flex-row flex-wrap">
                 {notes.map((note) => {
-                    console.log(note._id);
                     return <NotesItem key={note._id} note={note} />;
                 })}
             </div>
