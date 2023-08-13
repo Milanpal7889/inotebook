@@ -6,7 +6,7 @@ import { EditNote } from '../Dialogues/EditNote';
 
 const NotesItem = (props) => {
     const context = useContext(NoteContext);
-    const { deleteNote } = context.notes;
+    const { deleteNote } = context;
     const { note } = props;
     const [open, setOpen] = useState(null);
 
@@ -16,7 +16,7 @@ const NotesItem = (props) => {
 
     const handleClose = () => {
         setOpen(false);
-    };
+    };    
 
     return (
         <div className="max-w-sm rounded overflow-hidden shadow-lg m-6">

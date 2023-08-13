@@ -1,11 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import noteContext from '../context/notes/NoteContext'
 
 
 const LoginForm = () => {
-    const context = useContext(noteContext)
-    let { getNotes } = context
     const[note, setNote]=useState({email:"",password:""})
 
     const onChange = (e) => {
@@ -23,11 +20,15 @@ const LoginForm = () => {
             body: JSON.stringify(note)
         })
         setNote({email:"",password:""})
-        const json = await response.json()
-        localStorage.setItem('token',JSON.stringify(json))
-        getNotes() 
-        navigate('/');   
-        console.log(json)
+        const json = await response.json()  
+        if(json.success){
+            localStorage.setItem('token',JSON.stringify(json))
+            console.log(json)
+            navigate('/');
+        } 
+        else{
+            alert("wrong crendentials")
+        }
     }
 
     return (

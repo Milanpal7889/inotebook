@@ -11,7 +11,7 @@ function Navbar() {
       }, [location]);
     const navigate = useNavigate()
     const hanldeLogout = () =>{
-        localStorage.setItem('token',JSON.stringify({"success":false,"authToken":""}))
+        localStorage.removeItem('token')
         navigate("/login")
     }
   return (
