@@ -9,11 +9,11 @@ const Notes = () => {
     const { notes, getNotes} = context;
     const navigate = useNavigate()
     useEffect(() => {
-        if (localStorage.getItem("token")){
+        if (!(localStorage.getItem("token"))){
             // Use Redirect to navigate to the login page
-            getNotes();
-        } else {
             navigate('/login');
+        } else {
+            getNotes();
         }
     }, []);
 
