@@ -4,7 +4,7 @@ import NoteContext from "./NoteContext";
 const NoteState = (props) => {
     const host = "http://localhost:5000";
     const [notes, setNotes] = useState([]);
-    let { authToken } = JSON.parse(localStorage.getItem('token'));
+    let { authToken } = localStorage.getItem('token')?JSON.parse(localStorage.getItem('token')):"";
 
     //get token
     let getToken = () =>{
